@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sports Stars Reading Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1f2a44;--sky:#e8f4ff;--blue:#2f80ed;--sun:#ffc83d;--mint:#2bb673;--coral:#ff6b6b;--card:#fff;--line:#c9d8ea;--soft:#5b6b88}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#d9edff 0%,#fff6dd 100%) fixed;min-height:100vh;font-size:17px;line-height:1.55}
+h1,h2,h3{font-family:'Baloo 2','Nunito',sans-serif;margin:0;line-height:1.15}
+.wrap{max-width:820px;margin:0 auto;padding:16px 14px 90px}
+.card{background:var(--card);border-radius:22px;padding:22px;box-shadow:0 6px 0 #bcd4ee;margin-bottom:18px}
+.hidden{display:none!important}
+button{font:inherit;font-weight:800;border:0;border-radius:999px;padding:12px 26px;cursor:pointer;transition:transform .12s}
+button:active{transform:translateY(2px)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.btn-main{background:var(--blue);color:#fff;box-shadow:0 4px 0 #1b5cb3}
+.btn-go{background:var(--mint);color:#fff;box-shadow:0 4px 0 #1b8a53}
+.btn-alt{background:#eef3fa;color:var(--ink);box-shadow:0 4px 0 #cdd8e8}
+button:disabled{opacity:.4;cursor:not-allowed}
+/* start */
+.hero{text-align:center;padding:30px 20px}
+.hero .big{font-size:64px}
+.hero h1{font-size:2.4rem;color:var(--blue);margin:6px 0}
+.hero p{color:var(--soft);max-width:520px;margin:8px auto}
+.hero input{font:inherit;padding:12px 18px;border:3px solid var(--line);border-radius:999px;width:min(340px,100%);text-align:center;margin:12px 0 18px}
+.rules{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0;font-weight:700;font-size:.95rem}
+.rules span{background:var(--sky);padding:6px 14px;border-radius:999px}
+/* top bar */
+.top{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.93);backdrop-filter:blur(6px);border-radius:0 0 20px 20px;padding:10px 14px;box-shadow:0 4px 0 #bcd4ee;margin:0 -14px 18px}
+.steps{display:flex;gap:8px;justify-content:center}
+.dot{flex:1;max-width:150px;text-align:center;padding:6px 4px;border-radius:14px;background:#eef3fa;font-weight:800;font-size:.82rem;cursor:pointer;border:3px solid transparent}
+.dot.on{background:var(--sun);border-color:#e0a800}
+.dot.done{background:#d5f5e5}
+.bar{height:10px;background:#e3ebf6;border-radius:99px;margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mint),var(--blue));border-radius:99px;transition:width .4s}
+/* passage */
+.ph{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.ph .ic{font-size:44px}
+.ph small{color:var(--soft);font-weight:700}
+.dir{background:var(--sky);border-left:6px solid var(--blue);padding:8px 14px;border-radius:10px;font-weight:700;margin:8px 0 14px}
+.story p{margin:0 0 10px;font-family:'Nunito',serif;background:#fffbea;padding:0 0 0 0}
+.story{background:#fffbea;border:3px dashed #f0d77a;border-radius:16px;padding:14px 18px;margin-bottom:20px}
+.q{margin:18px 0 6px;padding-top:14px;border-top:3px dotted var(--line)}
+.q:first-of-type{border-top:0}
+.q b.n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--coral);color:#fff;margin-right:8px;font-family:'Baloo 2'}
+.q .pts{float:right;font-size:.8rem;background:var(--sky);padding:2px 10px;border-radius:99px;color:var(--soft);font-weight:800}
+textarea{width:100%;font:inherit;font-size:1.05rem;border:3px solid var(--line);border-radius:14px;padding:6px 14px;margin-top:10px;resize:vertical;color:var(--ink);line-height:32px;
+background:repeating-linear-gradient(transparent 0 31px,#b9cbe3 31px 32px);background-attachment:local}
+textarea:focus,.defrow input:focus,.tl input:focus{border-color:var(--blue)}
+.defrow{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.defrow label{font-weight:800;min-width:120px;color:var(--blue)}
+.defrow input,.tl input{font:inherit;flex:1;min-width:180px;border:0;border-bottom:3px solid var(--line);padding:6px 8px;background:#fafcff;border-radius:8px 8px 0 0}
+.tl{margin-top:12px;border-left:6px solid var(--blue);padding-left:14px}
+.tl .row{display:flex;gap:8px;margin-bottom:10px;align-items:center;flex-wrap:wrap}
+.tl .row input:first-child{flex:0 0 100px;min-width:90px;font-weight:800;text-align:center}
+.tl .row:before{content:"";width:14px;height:14px;border-radius:50%;background:var(--sun);border:3px solid var(--blue);margin-left:-28px;margin-right:6px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fff;box-shadow:0 -4px 0 #bcd4ee;padding:10px;display:flex;justify-content:center;gap:12px;z-index:6}
+/* results */
+.score{text-align:center}
+.ring{width:170px;height:170px;border-radius:50%;margin:10px auto;display:grid;place-items:center;background:conic-gradient(var(--mint) calc(var(--p)*1%),#e3ebf6 0)}
+.ring div{width:132px;height:132px;border-radius:50%;background:#fff;display:grid;place-items:center;font-family:'Baloo 2';font-size:2.4rem;font-weight:800;line-height:1}
+.ring small{display:block;font-size:.9rem;color:var(--soft);font-family:'Nunito'}
+.stars{font-size:34px;letter-spacing:4px}
+.grade{display:inline-block;background:var(--sun);padding:4px 18px;border-radius:99px;font-weight:800;margin:6px 0}
+.sec{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:800}
+.sec .t{flex:1;height:14px;background:#e3ebf6;border-radius:99px;overflow:hidden}
+.sec .t i{display:block;height:100%;background:var(--blue);border-radius:99px}
+.sec span:first-child{width:150px;font-size:.92rem}
+.sec span:last-child{width:60px;text-align:right}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th{background:var(--blue);color:#fff;padding:8px;text-align:left;font-family:'Baloo 2'}
+td{padding:8px;border-bottom:2px solid #eef3fa;vertical-align:top}
+.ans{background:#f6f9fe;border-radius:8px;padding:6px 10px;margin-bottom:6px;white-space:pre-wrap;word-break:break-word}
+.ans em{color:var(--soft)}
+.sample{background:#e8faf0;border-radius:8px;padding:6px 10px;font-size:.88rem}
+.mk{font-weight:800;white-space:nowrap}
+.good{color:#1b8a53}.mid{color:#c98200}.low{color:#d33}
+.note{font-size:.85rem;color:var(--soft);text-align:center;margin-top:10px}
+.acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+@media(max-width:560px){body{font-size:16px}.hero h1{font-size:1.9rem}.sec span:first-child{width:92px}.dot{font-size:.7rem}th:nth-child(3),td:nth-child(3){display:none}}
+.ov{position:fixed;inset:0;background:rgba(31,42,68,.55);display:grid;place-items:center;z-index:20;padding:16px}
+.box{background:#fff;border-radius:22px;padding:24px;max-width:420px;text-align:center;box-shadow:0 6px 0 #bcd4ee}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.tile{background:var(--sky);border-radius:16px;padding:10px 4px;font-weight:800}
+.tile b{display:block;font-family:'Baloo 2';font-size:1.8rem;line-height:1.1}
+.tile small{font-size:.75rem;color:var(--soft)}
+.tip{background:#fffbea;border-radius:14px;padding:10px 14px;margin-top:8px;text-align:left}
+@media print{.nav,.top,.acts{display:none!important}body{background:#fff}.card{box-shadow:none;border:1px solid #ccc}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section id="start" class="card hero">
+  <div class="big">🏅</div>
+  <h1>Sports Stars Reading Test</h1>
+  <p>Read four short stories about amazing athletes, then answer the questions in your own words.</p>
+  <div class="rules"><span>📖 4 passages</span><span>✏️ Write your answers</span><span>⭐ Get your score</span></div>
+  <div><input id="nm" placeholder="Type your name here" maxlength="40" aria-label="Your name"></div>
+  <button class="btn-main" id="go">Start the test</button>
+</section>
+
+<div id="test" class="hidden">
+  <div class="top"><div class="steps" id="steps"></div><div class="bar"><i id="pb"></i></div></div>
+  <div id="pages"></div>
+</div>
+
+<section id="result" class="hidden"></section>
+</div>
+
+<div class="nav hidden" id="nav">
+  <button class="btn-alt" id="prev">Back</button>
+  <button class="btn-main" id="next">Next</button>
+  <button class="btn-go hidden" id="sub">Submit test</button>
+</div>
+
+<div id="dlg" class="ov hidden"><div class="box"><h2 id="dt">Submit your test?</h2><p id="dm"></p><div class="acts"><button class="btn-alt" id="dno">Go back</button><button class="btn-go" id="dyes">Yes, submit</button></div></div></div>
+<script>
+const W=s=>s.trim()?s.trim().split(/\s+/).length:0;
+const P=[
+{title:"Track and Field",pg:84,ic:"👟",text:[
+"Many people recognize the name “Gail Devers” in the world of track and field. She won a gold medal for the United States at the 1992 Summer Olympics in Barcelona, Spain, in the women’s 100-meter dash. However, many people do not know that Gail Devers overcame near insurmountable odds to win that gold medal.",
+"In September 1990, 24-year-old Gail was diagnosed with Graves’ disease, which affects the thyroid gland. She had been fighting this illness for over 2 years before it was finally identified. Graves’ disease can cause irregular heartbeat, muscle weakness, nervousness and weight loss. It can also become cancerous. Imagine the difficulties that would create for a person who depends on her muscles in order to compete!",
+"Gail underwent chemotherapy and radiation, which had both good and bad effects on her body. Although the treatments brought her disease under control, the radiation burned her feet so badly that doctors considered amputation.",
+"Amazingly, Gail began her training regimen once again in March, 1991. After competing in several meets and doing well, she went to the United States Olympic Trials and qualified in both the hurdles and the 100-meter dash. Although she came in fifth in the hurdles, the gold medal she claimed in the 100-meter dash represented all her hard work and desire to overcome the odds."],
+qs:[
+{id:"t1",q:"Summarize the selection in 3 sentences.",type:"text",rows:5,pts:4,minw:20,need:3,keys:["devers|gail","graves|ill|disease","gold|100|olympic","train|hard work|overcame|odds|treatment|radiation"],sample:"Gail Devers won the 1992 Olympic gold medal in the 100-meter dash. Before that she was very ill with Graves’ disease, and her treatment badly burned her feet. She went back to training and overcame the odds through hard work."},
+{id:"t2a",q:"Define: regimen",type:"def",pts:1,minw:2,need:1,keys:["plan|routine|schedule|program|diet|treatment|training|system"],sample:"A set plan or routine, such as for training, diet or health."},
+{id:"t2b",q:"Define: amputation",type:"def",pts:1,minw:2,need:1,keys:["cut|remov|surg|limb|leg|arm|foot|body part"],sample:"Cutting off a part of the body, such as a leg or arm, by surgery."},
+{id:"t2c",q:"Define: thyroid",type:"def",pts:1,minw:2,need:1,keys:["gland|neck|hormone"],sample:"A gland in the neck that controls how the body uses energy."},
+{id:"t2d",q:"Define: insurmountable",type:"def",pts:1,minw:2,need:1,keys:["cannot|can’t|can't|impossible|overcome|too great|too hard|too difficult|unable|very difficult|beat"],sample:"Too big or too hard to overcome; impossible to beat."}]},
+{title:"Speed Skating",pg:85,ic:"⛸️",text:[
+"Imagine racing around a rink of glassy ice with only a thin blade of metal supporting you. Now, imagine skating so fast that you set a world record! That’s exactly what speed skater Bonnie Blair has done all of her life.",
+"Bonnie started skating before she was walking—on the shoulders of her older brothers and sisters. Bonnie won the 1971 Illinois state championships by the time she was 4. Bonnie was competing. At age 7, she dreamed of becoming an Olympian.",
+"That opportunity soon came. Bonnie competed in the 1988, 1992 and 1994 Olympics. She won a gold medal in the 500 meter race and a bronze medal in the 1,000 meter race in 1988, golds in both the 500 and 1,000 meter races in 1992 and repeated the two golds in 1994. No other U.S. woman has ever won five gold medals in the Olympics in any sport. Bonnie Blair is truly a champion!"],
+qs:[
+{id:"s1a",q:"Define: opportunity",type:"def",pts:1,minw:2,need:1,keys:["chance|possib|opening|moment|time|favou?rable|occasion"],sample:"A good chance to do something."},
+{id:"s1b",q:"Define: meter",type:"def",pts:1,minw:2,need:1,keys:["unit|length|measure|distance|100|centi|metre"],sample:"A unit used to measure length or distance (100 centimeters)."},
+{id:"s2",q:"Bonnie Blair competed over a period of 6 years in the Olympics. What qualities would be necessary to maintain both physical and mental condition to compete for so long?",type:"text",rows:3,pts:3,minw:15,need:2,keys:["disciplin","determin|persever|never give up","hard.?work|practi[cs]e|train","health|rest|diet|eat|sleep|exercise","focus|patien|commit|dedicat|motivat|confiden|strong"],sample:"She would need discipline, determination and hard work. She must train often, eat well and rest, and stay focused and positive."},
+{id:"s3",q:"Bonnie Blair participated in long-track skating, in which she raced with one other person against a clock for the best time. Do you think this would be easier or more difficult than racing a group to finish first? Why?",type:"text",rows:3,pts:3,minw:15,need:2,keys:["easier|difficult|harder|hard|easy","because|since|reason","clock|time|pressure","group|others|opponent|people|crowd|alone|one other","pace|fast|speed|bump|crash|block"],sample:"Any reasoned answer is accepted. For example: It is harder because you must beat the clock by yourself, with no one to follow. Or: Racing a group is harder because of crowding."},
+{id:"s4",q:"In your opinion, what makes a good athlete?",type:"text",rows:3,pts:3,minw:10,need:2,keys:["hard.?work|practi[cs]e|train","disciplin","determin|persever|never give up|passion|dedicat","talent|skill|strong|fit|fast","team|respect|honest|fair|sportsman|humble|kind|listen","health|rest|diet"],sample:"A good athlete works hard, practises every day, never gives up, respects others and plays fairly."}]},
+{title:"Baseball",pg:86,ic:"⚾",text:[
+"Babe Ruth was born George Herman Ruth in 1895. His family lived in Baltimore, Maryland and was quite poor. He overcame poverty to become one of the greatest baseball players of all time.",
+"Babe Ruth’s baseball career began with the Baltimore Orioles. He was a pitcher but also a tremendous batter. He later played for the Boston Red Sox and started his home run hitting fame with 29 home runs in 1919.",
+"In 1920, while playing for the New York Yankees, Babe Ruth hit 54 home runs. He had become very popular with baseball fans of all ages. Amazingly, by 1925, he was making more money than the president of the United States! His home-run record of 60 home runs in a single season went unshattered until Roger Maris broke it in 1961 with 61 home runs. Then, in 1998, Mark McGwire hit 62 home runs to become the new “home-run king.”",
+"Babe Ruth retired from baseball in 1935 with a career total of 714 home runs. He died in 1948 at age 53."],
+qs:[
+{id:"b1",q:"Summarize the selection in 3 sentences.",type:"text",rows:5,pts:4,minw:20,need:3,keys:["ruth|babe","poor|poverty|baltimore","home.?run|hit","yankees|red sox|orioles|pitcher|played","record|famous|greatest|popular|money","retire|died|714|1948|1935"],sample:"Babe Ruth grew up poor in Baltimore but became one of baseball’s greatest players. He hit many home runs, set a record of 60 in a season, and earned more than the president. He retired in 1935 with 714 home runs and died in 1948."},
+{id:"b2",q:"In the early 1900s, life expectancy was shorter than it is today. By today’s standards, Babe Ruth died at a relatively young age. What factors have contributed to increased life expectancy?",type:"text",rows:4,pts:3,minw:15,need:2,keys:["medic|doctor|hospital|surg","vaccin|immuni|antibiotic|cure","food|nutrition|diet|eat","clean|sanitation|hygiene|water|sewage","technolog|science|research|discover","exercise|healthy|health|care","safe|safety"],sample:"Better medicine, vaccines and hospitals, cleaner water and sanitation, better food and nutrition, and new technology and research help people live longer."},
+{id:"b3",q:"Create a time line of Babe Ruth’s life beginning with his birth and ending with his death. (Write the year and what happened.)",type:"time",pts:6,sample:"1895 Born in Baltimore · 1919 Hit 29 home runs · 1920 Hit 54 home runs for the Yankees · 1925 Earned more than the U.S. president · 1935 Retired with 714 home runs · 1948 Died at age 53"}]},
+{title:"Swimming",pg:87,ic:"🏊",text:[
+"In 1968, 18-year-old Mark Spitz boasted that he would win six gold medals at the Olympics being held in Mexico. He won two golds in team relay events. Having made this claim and then failing to achieve it made Mark Spitz determined to do better in the 1972 Olympics in Munich.",
+"For the next 4 years, Mark Spitz trained ferociously. Indeed, at the 1972 Olympics, Mark Spitz amazed the world by breaking all records and winning seven gold medals in seven different events. While doing so, he set new world record times in each event. Mark Spitz had accomplished his goal."],
+qs:[
+{id:"w1",q:"What feelings do you think Mark Spitz had after the 1968 Olympics?",type:"text",rows:3,pts:3,minw:8,need:1,keys:["disappoint|sad|upset|angry|frustrat|embarrass|ashamed|let down|unhappy|regret|determin|motivat|hurt|sorry|proud"],sample:"He probably felt disappointed and embarrassed, but also determined to work harder and do better next time."},
+{id:"w2",q:"What do you think is the moral to this story?",type:"text",rows:3,pts:3,minw:8,need:1,keys:["hard.?work|practi[cs]e|train|persever|never give up|don’t give up|don't give up|determin|try again|learn|goal|fail|boast|brag|humble|believe|effort|dedicat"],sample:"Hard work and determination can help you reach your goals, and you should learn from failure and never give up. Also, do not boast before you have won."},
+{id:"w3a",q:"Many Olympians are as young as Mark Spitz was, and some participate at even younger ages. Write one paragraph detailing the ADVANTAGES of being a young Olympian.",type:"text",rows:5,pts:3,minw:30,need:3,keys:["energy|energetic","strong|fit|fast|healthy","record|win|medal|gold","fame|famous|famil","long career|more time|many years|early|start|young","learn|train|coach|experience","recover|flexib|heal|quick","inspire|role model|proud|opportunit"],sample:"Young Olympians have lots of energy and heal quickly. They have more years to train and learn, can build a long career, may win medals and become famous early, and can inspire other children."},
+{id:"w3b",q:"Now write one paragraph detailing the DISADVANTAGES of being a young Olympian.",type:"text",rows:5,pts:3,minw:30,need:3,keys:["school|educat|study","pressure|stress|nervous|anxi","injur|hurt|pain|tired|exhaust","childhood|play|fun|friends","burn.?out|quit|give up","family|miss|home|lonely|alone","lose|fail|disappoint","expect|fame|media"],sample:"Young Olympians may miss school, friends and childhood fun. They face heavy pressure and stress, can get injured or exhausted, feel lonely away from family, and may burn out or feel crushed if they lose."}]}
+];
+const YEARS=[1895,1919,1920,1925,1935,1948];
+const $=id=>document.getElementById(id);
+let cur=0,name="";
+// build
+$("pages").innerHTML=P.map((p,i)=>`<section class="card hidden" id="pg${i}">
+<div class="ph"><span class="ic">${p.ic}</span><div><small>Page ${p.pg} · Passage ${i+1} of ${P.length}</small><h2>${p.title}</h2></div></div>
+<div class="dir">Read the selection. Then answer the questions.</div>
+<div class="story">${p.text.map(t=>`<p>${t}</p>`).join("")}</div>
+${p.qs.map((q,k)=>{
+ let body="";
+ if(q.type==="text")body=`<textarea id="${q.id}" rows="${q.rows}" aria-label="Answer" placeholder="Write your answer here…"></textarea>`;
+ else if(q.type==="def"){const w=q.q.replace("Define: ","");body=`<div class="defrow"><label for="${q.id}">${w}:</label><input id="${q.id}" placeholder="Write the meaning…"></div>`}
+ else body=`<div class="tl">${YEARS.map((y,j)=>`<div class="row"><input id="${q.id}y${j}" inputmode="numeric" maxlength="4" placeholder="Year"><input id="${q.id}e${j}" placeholder="What happened?"></div>`).join("")}</div>`;
+ return `<div class="q"><span class="pts">${q.pts} ${q.pts>1?"marks":"mark"}</span><p><b class="n">${q.type==="def"?"✎":k+1}</b>${q.q.replace(/^Define: .*/,"Define the word")}</p>${body}</div>`}).join("")}
+</section>`).join("");
+// fix numbering labels for grouped items
+$("steps").innerHTML=P.map((p,i)=>`<div class="dot" data-i="${i}" tabindex="0" role="button">${p.ic}<br>${p.title}</div>`).join("");
+function show(i){
+ cur=i;P.forEach((_,k)=>$("pg"+k).classList.toggle("hidden",k!==i));
+ document.querySelectorAll(".dot").forEach((d,k)=>{d.classList.toggle("on",k===i);d.classList.toggle("done",k<i&&answered(k)>0)});
+ $("pb").style.width=((i+1)/P.length*100)+"%";
+ $("prev").disabled=i===0;$("next").classList.toggle("hidden",i===P.length-1);$("sub").classList.toggle("hidden",i!==P.length-1);
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function val(id){const e=$(id);return e?e.value.trim():""}
+function answered(k){return P[k].qs.filter(q=>q.type==="time"?YEARS.some((_,j)=>val(q.id+"e"+j)):val(q.id)).length}
+function total(){return P.reduce((a,p)=>a+p.qs.length,0)}
+function mark(q){
+ if(q.type==="time"){let s=0,seen={};YEARS.forEach((_,j)=>{const y=+val(q.id+"y"+j),e=val(q.id+"e"+j);if(YEARS.includes(y)&&!seen[y]&&e.length>=3){s++;seen[y]=1}});return s}
+ const v=val(q.id);if(!v)return 0;
+ const hits=q.keys.filter(k=>new RegExp(k,"i").test(v)).length;
+ const f=.4*Math.min(1,W(v)/q.minw)+.6*Math.min(1,hits/q.need);
+ return Math.min(q.pts,Math.round(q.pts*f*2)/2);
+}
+function ansText(q){
+ if(q.type!=="time")return val(q.id)||null;
+ const r=YEARS.map((_,j)=>[val(q.id+"y"+j),val(q.id+"e"+j)]).filter(a=>a[0]||a[1]);
+ return r.length?r.map(a=>a[0]+" — "+a[1]).join("\n"):null;
+}
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function finish(){
+ let tot=0,max=0,secs=[],rows="",nFull=0,nPart=0,nLow=0,nBlank=0;
+ P.forEach((p,i)=>{let s=0,m=0;p.qs.forEach((q,k)=>{const sc=mark(q);s+=sc;m+=q.pts;const a=ansText(q);if(!a)nBlank++;else if(sc/q.pts>=.75)nFull++;else if(sc/q.pts>=.4)nPart++;else nLow++;const cls=sc/q.pts>=.75?"good":sc/q.pts>=.4?"mid":"low";
+  rows+=`<tr><td>${p.title.split(" ")[0]} ${i+1}.${k+1}</td><td><b>${esc(q.q)}</b><div class="ans">${a?esc(a):"<em>No answer</em>"}</div><div class="sample">💡 ${esc(q.sample)}</div></td><td class="mk ${cls}">${sc} / ${q.pts}</td></tr>`});
+  secs.push([p,s,m]);tot+=s;max+=m});
+ const pct=Math.round(tot/max*100);const srt=[...secs].sort((a,b)=>b[1]/b[2]-a[1]/a[2]),best=srt[0],worst=srt[srt.length-1];
+ const [g,msg,st]=pct>=85?["Superstar!","Amazing work! You read very carefully and wrote great answers.",5]:pct>=70?["Great job!","Well done! You understood most of what you read.",4]:pct>=50?["Good effort!","Nice try! Read the stories again and add more details next time.",3]:pct>=30?["Keep practising!","You are getting there. Read slowly and use words from the story.",2]:["Try again!","Don’t give up! Read each story again and answer every question.",1];
+ $("test").classList.add("hidden");$("nav").classList.add("hidden");
+ const r=$("result");r.classList.remove("hidden");
+ r.innerHTML=`<div class="card score"><h1 style="color:var(--blue)">${esc(name||"Student")}’s Scoresheet</h1>
+ <div class="ring" style="--p:${pct}"><div><span>${pct}%<small>${tot} / ${max}</small></span></div></div>
+ <div class="stars">${"⭐".repeat(st)}${"☆".repeat(5-st)}</div><div class="grade">${g}</div><p>${msg}</p>
+ <div class="tiles"><div class="tile"><b class="good">${nFull}</b><small>Excellent</small></div><div class="tile"><b class="mid">${nPart}</b><small>Partly right</small></div><div class="tile"><b class="low">${nLow}</b><small>Needs work</small></div><div class="tile"><b>${nBlank}</b><small>Not answered</small></div></div>
+ <div class="tip">🌟 <b>Strongest passage:</b> ${best[0].title} (${best[1]}/${best[2]})<br>📚 <b>Practise more:</b> ${worst[0].title} (${worst[1]}/${worst[2]})</div>
+ <p style="color:var(--soft);font-size:.9rem">${new Date().toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"})}</p></div>
+ <div class="card"><h2 style="margin-bottom:8px">Score by passage</h2>${secs.map(([p,s,m])=>`<div class="sec"><span>${p.ic} ${p.title}</span><div class="t"><i style="width:${s/m*100}%"></i></div><span>${s}/${m}</span></div>`).join("")}</div>
+ <div class="card"><h2 style="margin-bottom:8px">Question by question</h2><div style="overflow-x:auto"><table><tr><th>No.</th><th>Your answer &amp; a model answer</th><th>Mark</th></tr>${rows}</table></div>
+ <p class="note">Written answers are marked automatically by checking length and key ideas, so a teacher should review open-ended answers.</p>
+ <div class="acts"><button class="btn-main" onclick="window.print()">🖨️ Print scoresheet</button><button class="btn-go" onclick="location.reload()">🔁 Try again</button></div></div>`;
+ window.scrollTo({top:0});
+}
+$("go").onclick=()=>{name=$("nm").value.trim();if(!name){$("nm").focus();$("nm").style.borderColor="var(--coral)";$("nm").placeholder="Please type your name first";return}
+ $("start").classList.add("hidden");$("test").classList.remove("hidden");$("nav").classList.remove("hidden");show(0)};
+$("nm").addEventListener("keydown",e=>{if(e.key==="Enter")$("go").click()});
+$("prev").onclick=()=>show(cur-1);$("next").onclick=()=>show(cur+1);
+document.querySelectorAll(".dot").forEach(d=>{d.onclick=()=>show(+d.dataset.i);d.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")show(+d.dataset.i)}});
+$("sub").onclick=()=>{
+ let done=0;P.forEach((p,k)=>done+=answered(k));const left=total()-done;
+ $("dm").textContent=left>0?`You have ${left} unanswered question${left>1?"s":""}. Do you want to submit anyway?`:"You answered every question. Ready to see your scoresheet?";
+ $("dlg").classList.remove("hidden");$("dyes").focus();
+};
+$("dno").onclick=()=>$("dlg").classList.add("hidden");
+$("dyes").onclick=()=>{$("dlg").classList.add("hidden");finish()};
+</script>
+</body>
+</html>
